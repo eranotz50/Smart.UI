@@ -1,0 +1,3 @@
+[submodule "Smart.Classes.UI"]
+	path = Smart.Classes.UI
+	url = https://github.com/antonkulaga/Smart.Classes.UI
