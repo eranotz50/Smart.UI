@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"   
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ mc:Ignorable="d">
+
+	<Style TargetType="HorizontalScrollBar">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="HorizontalScrollBar">                    
+                    <FlexCanvas  DragManager.ChildrenDragCanvas="NearestParent" DragManager.ChildrenDockMode="DockEverywhere" CanvasUpdateMode="KeepCanvas" x:Name="Root" DragEnabled="True" Height="16" d:Width="500"  MinWidth="100" Background="White" WaitBeforeDrag="0:0:0" >
+                        <Rectangle x:Name="Shadow" DragManager.DragSubject="Horizontal" Fill="LightBlue"  Canvas.ZIndex="1" Opacity="0.5" FlexCanvas.Left="70" d:Width="40"  RadiusX="10" RadiusY="10"  StrokeThickness="1"/>
+                        <Rectangle x:Name="Substract"  Fill="Gray"  DragManager.DragSubject="None"/>
+                        <Rectangle x:Name="Slider" DragManager.DragSubject="Horizontal" Fill="Navy" FlexCanvas.Left="70" d:Width="80"  RadiusX="10" RadiusY="10"  StrokeThickness="1"/>
+                        <Triangle x:Name="BackwardFastArrow"  Margin="5,0,5,0"  Orientation="Left" Relative.To="Slider" Relative.Position="LeftSide"  StrokeThickness="1"  Width="15" Fill="Gray" />
+                        <Triangle x:Name="ForwardFastArrow"  Margin="5,0,5,0" Orientation="Right" Relative.To="Slider" Relative.Position="RightSide"  StrokeThickness="1"  Width="15" Fill="Gray" />
+                        <Rectangle x:Name="BackwardSplitter" Relative.To="BackwardFastArrow" Relative.Position="Right" Width="5" Fill="LightGray"/>
+                        <Rectangle x:Name="ForwardSplitter"  Relative.To="ForwardFastArrow" Relative.Position="Left" Width="5" Fill="LightGray"/>
+                        <Triangle x:Name="BackwardArrow"  Orientation="Left" FlexCanvas.Left="0"  StrokeThickness="1"  Width="15" Fill="AliceBlue" />
+                        <Triangle x:Name="ForwardArrow"  Orientation="Right" FlexCanvas.Right="0"  StrokeThickness="1"  Width="15" Fill="AliceBlue" />
+                    </FlexCanvas>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

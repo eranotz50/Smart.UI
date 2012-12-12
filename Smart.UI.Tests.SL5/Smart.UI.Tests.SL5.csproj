@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DAAD7385-C516-4610-884E-8AAAE22EC161}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Smart.UI.Tests.SL5</RootNamespace>
+    <AssemblyName>Smart.UI.Tests.SL5</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>Smart.UI.Tests.SL5.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>Smart.UI.Tests.SL5.App</SilverlightAppEntry>
+    <TestPageFileName>Smart.UI.Tests.SL5TestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Silverlight.Testing">
+      <HintPath>..\Smart.UI.Classes\libs\Microsoft.Silverlight.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
+      <HintPath>..\Smart.UI.Classes\Smart.Classes\libs\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdornersTests\GridLinesTest.cs" />
+    <Compile Include="AdornersTests\GrowTest.cs" />
+    <Compile Include="AdornersTests\ResizerTest.cs" />
+    <Compile Include="AdornersTests\WallAnimatorTest.cs" />
+    <Compile Include="AdornersTests\WidgetAdornerTest.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CuriosityTests\CuriosityTestBase.cs" />
+    <Compile Include="CuriosityTests\DependencyObjectCuriosityTest.cs" />
+    <Compile Include="CuriosityTests\PanelCuriousityTest.cs" />
+    <Compile Include="DraggingTests\ArrowSubjectTest.cs" />
+    <Compile Include="DraggingTests\DragDropTest.cs" />
+    <Compile Include="DraggingTests\WallDragTest.cs" />
+    <Compile Include="EventsTests\EventManagerTest.cs" />
+    <Compile Include="EventsTests\MockEvents.cs" />
+    <Compile Include="EventsTests\NonSimplePanelEvents.cs" />
+    <Compile Include="EventsTests\RoutingTest.cs" />
+    <Compile Include="EventsTests\ZoomEventTest.cs" />
+    <Compile Include="PanelsTests\DragPanelTest.cs" />
+    <Compile Include="PanelsTests\FlexCanvasTest\FlexCanvasTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\AutosAndConstrainsTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\ConstrainsTestcs.cs" />
+    <Compile Include="PanelsTests\GridsTests\DraggingTests\LinesDragging.cs" />
+    <Compile Include="PanelsTests\GridsTests\DraggingTests\SmartGridDraggingTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\DraggingTests\SnapingTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\GrowthTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\LinesTests\LineDefinitionsTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\LinesTests\LineDefinitionTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\LinesTests\LinesMovementsTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\LinesTests\UpdateTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\NumedCollectionTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\RawAdditionAndDeletionTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\ResizeCellTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\ResizeElementTest.cs" />
+    <Compile Include="PanelsTests\GridsTests\XamlGridTest.cs" />
+    <Compile Include="PanelsTests\LinesPanelTest\LinesPanelTest.cs" />
+    <Compile Include="PanelsTests\SimplePanelTest\OutModeTest.cs" />
+    <Compile Include="PanelsTests\SimplePanelTest\Pos3DTest.cs" />
+    <Compile Include="PanelsTests\SimplePanelTest\SimplePanelTest.cs" />
+    <Compile Include="PanelsTests\WidgetGridTest\CellsCheckingTest.cs" />
+    <Compile Include="PanelsTests\WidgetGridTest\MovingToCellTest.cs" />
+    <Compile Include="PanelsTests\WidgetGridTest\ShiftAndCanvasTest.cs" />
+    <Compile Include="PanelsTests\WidgetGridTest\WidgetGridTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelativeLayoutTests\RelativeLengthTest.cs" />
+    <Compile Include="RelativeLayoutTests\RelativeValueTest.cs" />
+    <Compile Include="RelativeTests\CustomUpdateLayoutTest.cs" />
+    <Compile Include="RelativeTests\OddityTest.cs" />
+    <Compile Include="RelativeTests\RelativeDragTest.cs" />
+    <Compile Include="RelativeTests\RelativeOrderTest.cs" />
+    <Compile Include="RelativeTests\RelativePositioningByXamlTest.cs" />
+    <Compile Include="RelativeTests\RelativePositioningTest.cs" />
+    <Compile Include="ScrollAndZoomTests\AnimatedScrollTest.cs" />
+    <Compile Include="ScrollAndZoomTests\PanelsCanvasTest.cs" />
+    <Compile Include="ScrollAndZoomTests\ScrollTest.cs" />
+    <Compile Include="ScrollAndZoomTests\ZoomTest.cs" />
+    <Compile Include="ShapesTests\TriangleTest.cs" />
+    <Compile Include="TestBases\AnimatedTestBase.cs" />
+    <Compile Include="TestBases\AnimationTestBase.cs" />
+    <Compile Include="TestBases\BasicWallTestBase.cs" />
+    <Compile Include="TestBases\GridTestBase.cs" />
+    <Compile Include="TestBases\PanelTestBase.cs" />
+    <Compile Include="TestBases\TestInterfaces.cs" />
+    <Compile Include="TestBases\WallTestBase.cs" />
+    <Compile Include="WallTests\AnimationTests\CellsAnimationTest.cs" />
+    <Compile Include="WallTests\MultipleWallsTest.cs" />
+    <Compile Include="WallTests\PaginationTest.cs" />
+    <Compile Include="WallTests\PositionTest.cs" />
+    <Compile Include="WallTests\WallAutoSizeTest.cs" />
+    <Compile Include="WallTests\WallCanvasGrowTest.cs" />
+    <Compile Include="WallTests\WallScrollerTest.cs" />
+    <Compile Include="WallTests\WallTest.cs" />
+    <Compile Include="WallTests\WallXamlTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="RelativeTests\RelativePositioningByXamlTest.cs.orig" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Design.Data\Design.Data.csproj">
+      <Project>{580aa9d8-00f4-4a39-a040-81c44badfc0e}</Project>
+      <Name>Design.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.Classes\Smart.Classes.SL5.csproj">
+      <Project>{f0b2d266-4205-4bb3-bdc0-a91c6ff3e508}</Project>
+      <Name>Smart.Classes.SL5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.Classes\Smart.TestExtensions\Smart.TestExtensions.csproj">
+      <Project>{aeea0c91-800b-4442-8d14-a454a789b03c}</Project>
+      <Name>Smart.TestExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.UI.Classes.SL5.csproj">
+      <Project>{d655ed17-ce85-49bd-9bed-d85af676f971}</Project>
+      <Name>Smart.UI.Classes.SL5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.UI.Classes.Tests\Smart.UI.Classes.Tests.csproj">
+      <Project>{234bfcd5-8d9b-4a5d-b984-e57d42ef5e2d}</Project>
+      <Name>Smart.UI.Classes.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Controls\Smart.UI.Controls.SL5.csproj">
+      <Project>{5d99ebe7-0cf0-403b-8c57-5dbad65c3d62}</Project>
+      <Name>Smart.UI.Controls.SL5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Panels\Smart.UI.Panels.SL5.csproj">
+      <Project>{dfda147c-95d6-44ce-a89e-9c65d2d54a53}</Project>
+      <Name>Smart.UI.Panels.SL5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Relatives\Smart.UI.Relatives.SL5.csproj">
+      <Project>{4180d5c2-e74c-4224-8ea6-54db345bb156}</Project>
+      <Name>Smart.UI.Relatives.SL5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Widgets\Smart.UI.Widgets.SL5.csproj">
+      <Project>{9033aa97-1f6e-466e-abb8-de90a095d196}</Project>
+      <Name>Smart.UI.Widgets.SL5</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

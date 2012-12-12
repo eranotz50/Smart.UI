@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3771365A-C06F-4017-8640-EB32AAA8A2D7}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Smart.Widgets.WPF</RootNamespace>
+    <AssemblyName>Smart.Widgets.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PanelAdorners\AdornerCollection.cs" />
+    <Compile Include="PanelAdorners\AdornerHelper.cs" />
+    <Compile Include="PanelAdorners\Adorners.cs" />
+    <Compile Include="PanelAdorners\CanvasAdorner.cs" />
+    <Compile Include="PanelAdorners\ForGrids\GridLines.cs" />
+    <Compile Include="PanelAdorners\ForGrids\HorizontalGridLine.cs" />
+    <Compile Include="PanelAdorners\ForGrids\VerticalGridLine.cs" />
+    <Compile Include="PanelAdorners\ForWidgets\WidgetAdorner.cs" />
+    <Compile Include="PanelAdorners\IAdorner.cs" />
+    <Compile Include="PanelAdorners\Resizers\BasicResizer.cs" />
+    <Compile Include="PanelAdorners\Resizers\Boundary.cs" />
+    <Compile Include="PanelAdorners\Resizers\GrowSubjects.cs" />
+    <Compile Include="PanelAdorners\Resizers\RectangleAndEllipseBoundary.cs" />
+    <Compile Include="PanelAdorners\Resizers\ResizeAllAdorner.cs" />
+    <Compile Include="PanelAdorners\Resizers\Resizer.cs" />
+    <Compile Include="PanelAdorners\SimpleAdorner.cs" />
+    <Compile Include="PanelAdorners\WallAnimator.cs" />
+    <Compile Include="PanelAdorners\Zooming\ZoomAdorner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wall\IPanelItem.cs" />
+    <Compile Include="Wall\OrientedCellsRegion.cs" />
+    <Compile Include="Wall\Paginator.cs" />
+    <Compile Include="Wall\Triplets.cs" />
+    <Compile Include="Wall\Wall.cs" />
+    <Compile Include="Wall\WallCollections.cs" />
+    <Compile Include="Wall\WallExtension.cs" />
+    <Compile Include="Wall\WallScrollManager.cs" />
+    <Compile Include="WidgetGrid\IWidget.cs" />
+    <Compile Include="WidgetGrid\WidgetDynamicDependancyProperty.cs" />
+    <Compile Include="WidgetGrid\WidgetExtenstions.cs" />
+    <Compile Include="WidgetGrid\WidgetGrid.cs" />
+    <Compile Include="WidgetGrid\WidgetWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.UI.Panels\Smart.UI.Panels.WPF.csproj">
+      <Project>{84aace13-92d2-4e59-9da4-8303d54d0da0}</Project>
+      <Name>Smart.Panels.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Relatives\Smart.UI.Relatives.WPF.csproj">
+      <Project>{fb0229a9-29a6-4591-aa6b-26d1e0814a70}</Project>
+      <Name>Smart.Relatives.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.Classes\Smart.Classes.csproj">
+      <Project>{a9cdf0ba-261a-4c88-8c78-61ea0d0a34af}</Project>
+      <Name>Smart.Classes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.UI.Classes.WPF.csproj">
+      <Project>{25f9936a-f9b6-4472-8593-731b44eabd70}</Project>
+      <Name>Smart.UI.Classes.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

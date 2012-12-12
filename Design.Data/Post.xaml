@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SilverExperimental.DesignData.Post"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:liquid="clr-namespace:Liquid;assembly=Smart.UI.Controls"
+             mc:Ignorable="d"
+      d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Rectangle x:Name="BorderPicture" Fill="#FF00A9DA"></Rectangle>
+        <Image x:Name="imgAuthor" Stretch="Fill" Margin="2"></Image>
+        <Rectangle x:Name="BorderTop" Grid.Column="1" Height="25" VerticalAlignment="Top" Fill="#FF00A9DA"></Rectangle>
+        <TextBlock x:Name="txtAuthorName" Grid.Column="1" VerticalAlignment="Top" Foreground="White" FontSize="18" Margin="5,0,0,0">Имя автора</TextBlock>
+        <TextBlock x:Name="txtPublished" Grid.Column="1" VerticalAlignment="Top" Margin="5,25,0,0" FontSize="12" Foreground="Gray" FontWeight="Bold">01.01.01</TextBlock>
+        <TextBlock x:Name="txtReplies" Grid.Column="1" VerticalAlignment="Top" Margin="5,25,5,0" HorizontalAlignment="Right" FontSize="12" Foreground="Gray" FontWeight="Bold">комментариев:0</TextBlock>
+        <!--<Rectangle Fill="#FF00A9DA" Grid.Row="1" Grid.ColumnSpan="2"></Rectangle>-->
+        <!--<my:HtmlTextBlock x:Name="htmlTextBlock" Grid.Row="1" Grid.ColumnSpan="2" Background="White" Margin="2,0,2,2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False" UseDoubleLineBreakBetweenParagraphs="False"/>-->
+        <liquid:HtmlRichTextArea x:Name="htmlTextBlock" BorderThickness="0" Grid.Row="1" Grid.ColumnSpan="2" Background="White" Margin="2,0,2,2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False"/>
+    </Grid>
+</UserControl>

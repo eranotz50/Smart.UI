@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84AACE13-92D2-4E59-9DA4-8303D54D0DA0}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Smart.Panels.WPF</RootNamespace>
+    <AssemblyName>Smart.Panels.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicPanels\BasicSmartPanel.cs" />
+    <Compile Include="BasicPanels\CanvasPlace.cs" />
+    <Compile Include="BasicPanels\PanelEnums.cs" />
+    <Compile Include="BasicPanels\PanelExtensions.cs" />
+    <Compile Include="BasicPanels\SimplePanel.cs" />
+    <Compile Include="BasicPanels\SimplePanelExtensions.cs" />
+    <Compile Include="DragAndDrop\ArrowSubject.cs" />
+    <Compile Include="DragAndDrop\DragCanvasConverter.cs" />
+    <Compile Include="DragAndDrop\DragEnums.cs" />
+    <Compile Include="DragAndDrop\DragExtensions.cs" />
+    <Compile Include="DragAndDrop\DragManager.cs" />
+    <Compile Include="DragAndDrop\DragPanel.cs" />
+    <Compile Include="DragAndDrop\DragPanelExtensions.cs" />
+    <Compile Include="DragAndDrop\DragSubjectConverter.cs" />
+    <Compile Include="DragAndDrop\DragSubjects.cs" />
+    <Compile Include="DragAndDrop\DragTargetConverter.cs" />
+    <Compile Include="DragAndDrop\FlyObjects.cs" />
+    <Compile Include="FlexCanvas\CanvasExtractor.cs" />
+    <Compile Include="FlexCanvas\CanvasPlaceholder.cs" />
+    <Compile Include="FlexCanvas\FlexCanvas.cs" />
+    <Compile Include="FlexCanvas\FlexCanvasExtensions.cs" />
+    <Compile Include="Grids\Dragging\GridDragManager.cs" />
+    <Compile Include="Grids\Dragging\GridDragSubjects.cs" />
+    <Compile Include="Grids\Extensions\AddRemoveGridExtensions.cs" />
+    <Compile Include="Grids\Extensions\AnimationGridExtensions.cs" />
+    <Compile Include="Grids\Extensions\FlexGridExtensions.cs" />
+    <Compile Include="Grids\Extensions\GridChildrenExtensions.cs" />
+    <Compile Include="Grids\Extensions\GridGrowingExtensions.cs" />
+    <Compile Include="Grids\Extensions\LineDefinitionsExtensions.cs" />
+    <Compile Include="Grids\Extensions\OrientableGridExtensions.cs" />
+    <Compile Include="Grids\FlexGrid.cs" />
+    <Compile Include="Grids\Lines\GridExtraClasses.cs" />
+    <Compile Include="Grids\Lines\LineDefinition.cs" />
+    <Compile Include="Grids\Lines\LineDefinitions.cs" />
+    <Compile Include="Grids\Lines\LineDistance.cs" />
+    <Compile Include="Grids\SmartGrid.cs" />
+    <Compile Include="IChildElement.cs" />
+    <Compile Include="MovementAnimations.cs" />
+    <Compile Include="PanelInterfaces.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\Arrow.cs" />
+    <Compile Include="Shapes\FreePath.cs" />
+    <Compile Include="Shapes\HorizontalArrow.cs" />
+    <Compile Include="Shapes\LinesPath.cs" />
+    <Compile Include="Shapes\Triangle.cs" />
+    <Compile Include="Shapes\VerticalArrow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.Classes\Smart.Classes.csproj">
+      <Project>{a9cdf0ba-261a-4c88-8c78-61ea0d0a34af}</Project>
+      <Name>Smart.Classes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.UI.Classes\Smart.UI.Classes.WPF.csproj">
+      <Project>{25f9936a-f9b6-4472-8593-731b44eabd70}</Project>
+      <Name>Smart.UI.Classes.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
