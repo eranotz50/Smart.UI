@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media.Animation;
@@ -9,9 +10,22 @@ using Smart.UI.Classes.Layout;
 
 namespace Smart.UI.Panels
 {
+    /// <summary>
+    /// /Animations for movement of elements on smart panels
+    /// </summary>
     public static class MovementAnimations
     {
-        public static Animation CreateExpand<T>(this Collection<T> elements, Pos3D point, double len,
+        /// <summary>
+        /// Creates expanding animation for the collection of elements
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="elements"></param>
+        /// <param name="point"></param>
+        /// <param name="len"></param>
+        /// <param name="howLong"></param>
+        /// <param name="easing"></param>
+        /// <returns></returns>
+        public static Animation CreateExpand<T>(this IEnumerable<T> elements, Pos3D point, double len,
                                                 TimeSpan howLong = default(TimeSpan), IEasingFunction easing = null)
             where T : FrameworkElement
         {
@@ -31,6 +45,14 @@ namespace Smart.UI.Panels
                     });
         }
 
+        /// <summary>
+        /// Movement animation that use Pos3D
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="to"></param>
+        /// <param name="howLong"></param>
+        /// <param name="easing"></param>
+        /// <returns></returns>
         public static Animation MoveTo(this FrameworkElement element, Pos3D to, TimeSpan howLong = default(TimeSpan),
                                        IEasingFunction easing = null)
         {
@@ -45,6 +67,12 @@ namespace Smart.UI.Panels
                     });
         }
 
+        /// <summary>
+        /// Movement without animation
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="element"></param>
+        /// <param name="to"></param>
         public static void JustMoveTo(double q, FrameworkElement element, Pos3D to)
         {
             Pos3D from = element.ExtractPos();
@@ -52,6 +80,14 @@ namespace Smart.UI.Panels
             SimplePanel.SetPos(element, delta*q + from);
         }
 
+        /// <summary>
+        /// Movement animation that uses place as movement mechanism, it not only can change scale together with coordinates
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="to"></param>
+        /// <param name="howLong"></param>
+        /// <param name="easing"></param>
+        /// <returns></returns>
         public static Animation MoveTo(this FrameworkElement element, Rect to, TimeSpan howLong = default(TimeSpan),
                                        IEasingFunction easing = null)
         {

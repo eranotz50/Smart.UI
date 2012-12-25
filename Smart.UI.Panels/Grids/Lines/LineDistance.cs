@@ -1,4 +1,5 @@
 ﻿using System;
+using Smart.Classes.Collections;
 
 namespace Smart.UI.Panels
 {
@@ -22,6 +23,14 @@ namespace Smart.UI.Panels
         public int ColSpan;
         public int Row;
         public int RowSpan;
+
+        public CellsRegion(Num2D num, int colSpan = 1, int rowSpan = 1)
+        {
+            Col = num.X;
+            Row = num.Y;
+            ColSpan = colSpan;
+            RowSpan = rowSpan;
+        }
 
         public CellsRegion(int col, int row, int colSpan = 1, int rowSpan = 1)
         {

@@ -367,8 +367,8 @@ namespace Smart.UI.Tests.ScrollAndZoomTests
             this.VScroll.Position.Start.ShouldBeNear(0.1);
             this.VScroll.Position.Length.ShouldBeNear(0.5);
             
-            this.Grids.Space.Canvas.RoundEquals(new Rect(600, 200, 1000, 1000)).ShouldBeTrue();
-            this.Grids.Space.Canvas.RoundEquals(new Rect(0, 0, 2000, 2000)).ShouldBeTrue(); ;
+            //this.Grids.Space.Canvas.RoundEquals(new Rect(600, 200, 1000, 1000)).ShouldBeTrue();
+            //this.Grids.Space.Canvas.RoundEquals(new Rect(0, 0, 2000, 2000)).ShouldBeTrue(); ;
 
             this.UpdateLayout();
 

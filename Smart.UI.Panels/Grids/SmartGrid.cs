@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Windows;
 using System.Windows.Media.Animation;
 using Smart.UI.Panels;
@@ -300,6 +301,7 @@ namespace Smart.UI.Panels
         /// <returns></returns>
         public Rect GetCellsRect(int column, int row, int colSpan, int rowSpan)
         {
+            Contract.Requires(RowDefinitions.Count>row+rowSpan && ColumnDefinitions.Count>column+colSpan);
             return new Rect(ColumnDefinitions.GetCoord(column), RowDefinitions.GetCoord(row),
                             ColumnDefinitions.GetLength(column, colSpan, ActualWidth),
                             RowDefinitions.GetLength(row, rowSpan, ActualHeight));

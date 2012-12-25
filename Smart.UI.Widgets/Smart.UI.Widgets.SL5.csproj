@@ -60,6 +60,8 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\MoveInCellsEvent.cs" />
+    <Compile Include="Events\MoveToCellsEvent.cs" />
     <Compile Include="PanelAdorners\AdornerCollection.cs" />
     <Compile Include="PanelAdorners\AdornerHelper.cs" />
     <Compile Include="PanelAdorners\Adorners.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="WidgetGrid\WidgetDynamicDependancyProperty.cs" />
     <Compile Include="WidgetGrid\WidgetExtenstions.cs" />
     <Compile Include="WidgetGrid\WidgetGrid.cs" />
+    <Compile Include="WidgetGrid\WidgetGridAnimations.cs" />
     <Compile Include="WidgetGrid\WidgetWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +118,7 @@
       <Name>Smart.UI.Relatives.SL5</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

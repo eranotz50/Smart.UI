@@ -65,7 +65,12 @@ namespace Smart.UI.Widgets
         /// </summary>
         public int ColsNum
         {
-            get { return ColumnDefinitions.Count; }
+            get
+            {
+                //return ColumnDefinitions.Count;
+                SetValue(ColsNumProperty, ColumnDefinitions.Count);
+                return (int)GetValue(ColsNumProperty);
+            }
             set
             {
                 if (value <= 0 || value.Equals(ColsNum)) return;
@@ -79,7 +84,11 @@ namespace Smart.UI.Widgets
         /// </summary>        
         public int RowsNum
         {
-            get { return RowDefinitions.Count; }
+            get
+            {
+                SetValue(RowsNumProperty, RowDefinitions.Count);
+                return (int) GetValue(RowsNumProperty);
+            }
             set
             {
                 if (value <= 0 || value.Equals(RowsNum)) return;
@@ -87,7 +96,7 @@ namespace Smart.UI.Widgets
                 SetValue(RowsNumProperty, RowDefinitions.Count);
             }
         }
-
+        
         public Boolean PreserveSpans
         {
             get { return (Boolean) GetValue(PreserveSpansProperty); }
@@ -140,14 +149,19 @@ namespace Smart.UI.Widgets
         /// <returns></returns>
         protected Boolean CheckProjection(FrameworkElement element)
         {
-            Rect bounds = element.GetBounds();
+            Rect bounds = element.GetRelativeRect(this);
             CellsRegion cells = MeasureCellsRegion(bounds);
             return
                 this.ChildrenInCells<FrameworkElement>(cells).Any(
                     e => e.GetElementType() == ElementType.Normal && e != element);
         }
 
-        public override bool AllowDock(ObjectFly fly)
+        /// <summary>
+        /// Default handler that decides if the function should park the object or not
+        /// </summary>
+        /// <param name="fly"></param>
+        /// <returns></returns>
+        protected override bool AllowDockHandler(ObjectFly fly)
         {
             return fly.DockMode != DockMode.DockOnFreeSpace || !CheckProjection(fly.Target);
             //return base.AllowDock(fly);
@@ -252,7 +266,7 @@ namespace Smart.UI.Widgets
         {
             Contract.Requires(place!=Rect.Empty);
            // Contract.Ensures(!GetRelativeToGrid(element) && this.GetCellsRegion(ele));
-            Rect rect = GetCellsRect(region);
+            Rect rect = this.GetCellsRect(region);
             if (place.RoundEquals(rect))            
                 element.MakeAbsolute();
             else
@@ -282,7 +296,7 @@ namespace Smart.UI.Widgets
         }
 
         /// <summary>
-        /// Changes cells regions silently (slot stays the same but col and rowspance move
+        /// Changes cells regions silently (slot stays the same but col and rowspance move)
         /// </summary>
         /// <param name="element"></param>
         /// <param name="slot">Position of the element </param>
@@ -350,62 +364,6 @@ namespace Smart.UI.Widgets
             InvisibleChange(element, newPlace,oldRegion, measurement);
             if (PreserveSpans) element.SetRowSpan(oldRegion.RowSpan).SetColumnSpan(oldRegion.ColSpan);
             
-        }
-
-        #endregion
-
-        #region MOVEMENTS UP DOWN RIGHT
-
-        public Animation MoveInCellsTo(FrameworkElement element, CellsRegion destR, TimeSpan howLong = default(TimeSpan),
-                                       IEasingFunction easing = null)
-        {
-            return new Animation(howLong, easing).OnEachStart(
-                (i, ani) =>
-                    {
-                        Rect from = InvisibleChange(element, destR);
-                        if (from.Equals(Rect.Empty)) from = element.GetBounds();
-                        element.SetPos(default(Pos3D));
-
-                        Rect cell = GetCellsRect(destR);
-                        double x = cell.X - from.X;
-                        double y = cell.Y - from.Y;
-                        double w = cell.Width - from.Width;
-                        double h = cell.Height - from.Height;
-
-                        ani.DoOnNext +=
-                            q =>
-                            PlaceInCells(element,
-                                         new Rect(from.X + x*q, from.Y + y*q, from.Width + w*q, from.Height + h*q));
-                        ani.OnNext(i);
-                    });
-        }
-
-        public Animation MoveUp(FrameworkElement element, int shift = 1, TimeSpan howlong = default(TimeSpan))
-        {
-            return MoveDown(element, -shift, howlong);
-        }
-
-        public Animation MoveDown(FrameworkElement element, int shift = 1, TimeSpan howlong = default(TimeSpan))
-        {
-            int row = GetRow(element);
-            int sum = row + shift;
-            int span = GetRowSpan(element);
-            row = row + shift < 0 || sum + span >= RowDefinitions.Length ? row : sum;
-            return MoveToCell(element, GetColumn(element), row, GetColumnSpan(element), span, howlong);
-        }
-
-        public Animation MoveRight(FrameworkElement element, int shift = 1, TimeSpan howlong = default(TimeSpan))
-        {
-            int col = GetColumn(element);
-            int sum = col + shift;
-            int span = GetColumnSpan(element);
-            col = col + shift < 0 || sum + span >= ColumnDefinitions.Length ? col : sum;
-            return MoveToCell(element, col, GetRow(element), span, GetRowSpan(element), howlong);
-        }
-
-        public Animation MoveLeft(FrameworkElement element, int shift = 1, TimeSpan howlong = default(TimeSpan))
-        {
-            return MoveRight(element, -shift, howlong);
         }
 
         #endregion
@@ -494,37 +452,7 @@ namespace Smart.UI.Widgets
             Space.ZoomAt(zoom, element.GetRelativeRect(this));
         }
 
-        public Animation ZoomAt(FrameworkElement element, TimeSpan howLong, IEasingFunction easing = null)
-        {
-            return ZoomAt(element.GetRelativeRect(this), howLong, easing);
-        }
-
-        public Animation ZoomAt(Rect bounds, TimeSpan howLong, IEasingFunction easing = null)
-        {
-            return new Animation(howLong, easing).OnEachStart(
-                (i, ani) =>
-                    {
-                        Rect rect = Space.Panel;
-                        //var bounds = element.GetRelativeRect(this);
-                        Size size = Space.Canvas.Size();
-                        var factor = new Size(rect.Width/bounds.Width, rect.Height/bounds.Height);
-                        Size newCanvasSize = size.MultiplyBy(factor);
-                        Point delta = newCanvasSize.Substract(size);
-                        var endShift = new Point(factor.Width*bounds.X, factor.Height*bounds.Y);
-                        ani.DoOnNext += q =>
-                                            {
-                                                var f = new Point(q*(factor.Width - 1) + 1, q*(factor.Height - 1) + 1);
-                                                //this.CanvasSize = size.MultiplyBy(f);
-
-                                                Space.CanvasChange.FireChange(
-                                                    Space.Canvas.SetSize(size.Width + delta.X*q, size.Height + delta.Y*q));
-                                                Space.PanelChange.FireChange(
-                                                    Space.Panel.SetCoords(rect.X*f.X + endShift.X*q,
-                                                                          rect.Y*f.Y + endShift.Y*q));
-                                            };
-                        ani.OnNext(i);
-                    });
-        }
+       
 
         #endregion
     }

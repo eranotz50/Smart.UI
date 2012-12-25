@@ -18,88 +18,15 @@ namespace Smart.UI.Panels
     {
         #region DEPENDENCY PROPERTIES
 
-        /// <summary>
-        /// Row definitions
-        /// </summary>
-        private static readonly DependencyProperty RowDefinitionsProperty = DependencyProperty.Register(
-            "RowDefinitions", typeof (LineDefinitions), typeof (FlexGrid), new PropertyMetadata(null, RowsCallback));
-
+      
 
         /// <summary>
         /// Columns
         /// </summary>
-        private static readonly DependencyProperty ColumnDefinitionsProperty =
+        public static readonly DependencyProperty ColumnDefinitionsProperty =
             DependencyProperty.Register("ColumnDefinitions", typeof (LineDefinitions), typeof (FlexGrid),
                                         new PropertyMetadata(null, ColumnsCallback));
 
-        public static readonly DependencyProperty RowProperty = DependencyProperty.RegisterAttached("Row", typeof (int),
-                                                                                                    typeof (
-                                                                                                        FrameworkElement
-                                                                                                        ),
-                                                                                                    new PropertyMetadata
-                                                                                                        (0,
-                                                                                                         InvalidateParentMeasureCallback));
-
-        /// <summary>
-        /// количество рядков что занимает элемент
-        /// </summary>
-        public static readonly DependencyProperty RowSpanProperty = DependencyProperty.RegisterAttached("RowSpan",
-                                                                                                        typeof (int),
-                                                                                                        typeof (
-                                                                                                            FrameworkElement
-                                                                                                            ),
-                                                                                                        new PropertyMetadata
-                                                                                                            (1,
-                                                                                                             InvalidateParentMeasureCallback));
-
-        /// <summary>
-        /// Колонка элемента
-        /// </summary>
-        public static readonly DependencyProperty ColumnProperty = DependencyProperty.RegisterAttached("Column",
-                                                                                                       typeof (int),
-                                                                                                       typeof (
-                                                                                                           FrameworkElement
-                                                                                                           ),
-                                                                                                       new PropertyMetadata
-                                                                                                           (0,
-                                                                                                            InvalidateParentMeasureCallback));
-
-        /// <summary>
-        /// количество колонок, что занимает элемент
-        /// </summary>
-        public static readonly DependencyProperty ColumnSpanProperty = DependencyProperty.RegisterAttached(
-            "ColumnSpan", typeof (int), typeof (FrameworkElement),
-            new PropertyMetadata(1, InvalidateParentMeasureCallback));
-
-       
-        public LineDefinitions RowDefinitions
-        {
-            get { return this.GetOrDefault<LineDefinitions>(RowDefinitionsProperty); }
-            set { SetValue(RowDefinitionsProperty, value); }
-        }
-
-
-        /// <summary>
-        /// Callback than invalidates measure of the element
-        /// </summary>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
-        public static void RowsCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var p = d as FlexGrid;
-            if (p == null) return;
-            var old = e.OldValue as LineDefinitions;
-            var val = e.NewValue as LineDefinitions;
-            p.OnLineDefinitionsChanged(old, val, Orientation.Horizontal);
-        }
-
-
-
-        public LineDefinitions ColumnDefinitions
-        {
-            get { return this.GetOrDefault<LineDefinitions>(ColumnDefinitionsProperty); }
-            set { SetValue(ColumnDefinitionsProperty, value); }
-        }
 
         /// <summary>
         /// Callback than invalidates measure of the element
@@ -115,34 +42,54 @@ namespace Smart.UI.Panels
             p.OnLineDefinitionsChanged(old, val, Orientation.Horizontal);
         }
 
-     
 
-
-        public static int GetRow(FrameworkElement element)
+        public LineDefinitions ColumnDefinitions
         {
-            return (int) element.GetValue(RowProperty);
+            get { return this.GetOrDefault<LineDefinitions>(ColumnDefinitionsProperty); }
+            set { SetValue(ColumnDefinitionsProperty, value); }
         }
 
-        public static void SetRow(FrameworkElement element, int value)
+        /// <summary>
+        /// Row definitions
+        /// </summary>
+        public static readonly DependencyProperty RowDefinitionsProperty = DependencyProperty.Register(
+            "RowDefinitions", typeof(LineDefinitions), typeof(FlexGrid), new PropertyMetadata(null, RowsCallback));
+
+        public LineDefinitions RowDefinitions
         {
-            element.SetValue(RowProperty, value);
+            get { return this.GetOrDefault<LineDefinitions>(RowDefinitionsProperty); }
+            set { SetValue(RowDefinitionsProperty, value); }
         }
 
-
-        public static int GetRowSpan(FrameworkElement element)
+        /// <summary>
+        /// Callback than invalidates measure of the element
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        public static void RowsCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            return (int) element.GetValue(RowSpanProperty);
+            var p = d as FlexGrid;
+            if (p == null) return;
+            var old = e.OldValue as LineDefinitions;
+            var val = e.NewValue as LineDefinitions;
+            p.OnLineDefinitionsChanged(old, val, Orientation.Horizontal);
         }
 
-        public static void SetRowSpan(FrameworkElement element, int value)
-        {
-            element.SetValue(RowSpanProperty, value);
-        }
-
+        /// <summary>
+        /// Колонка элемента
+        /// </summary>
+        public static readonly DependencyProperty ColumnProperty = DependencyProperty.RegisterAttached("Column",
+                                                                                                       typeof(int),
+                                                                                                       typeof(
+                                                                                                           FrameworkElement
+                                                                                                           ),
+                                                                                                       new PropertyMetadata
+                                                                                                           (0,
+                                                                                                            InvalidateParentMeasureCallback));
 
         public static int GetColumn(FrameworkElement element)
         {
-            return (int) element.GetValue(ColumnProperty);
+            return (int)element.GetValue(ColumnProperty);
         }
 
         public static void SetColumn(FrameworkElement element, int value)
@@ -150,16 +97,65 @@ namespace Smart.UI.Panels
             element.SetValue(ColumnProperty, value);
         }
 
+        /// <summary>
+        /// how many columns are located by the element
+        /// </summary>
+        public static readonly DependencyProperty ColumnSpanProperty = DependencyProperty.RegisterAttached(
+            "ColumnSpan", typeof(int), typeof(FrameworkElement),
+            new PropertyMetadata(1, InvalidateParentMeasureCallback));
+
+
 
         public static int GetColumnSpan(FrameworkElement element)
         {
-            return (int) element.GetValue(ColumnSpanProperty);
+            return (int)element.GetValue(ColumnSpanProperty);
         }
 
         public static void SetColumnSpan(FrameworkElement element, int value)
         {
             element.SetValue(ColumnSpanProperty, value);
         }
+
+        public static readonly DependencyProperty RowProperty = DependencyProperty.RegisterAttached("Row", typeof (int),
+                                                                                                    typeof (
+                                                                                                        FrameworkElement
+                                                                                                        ),
+                                                                                                    new PropertyMetadata
+                                                                                                        (0,
+                                                                                                         InvalidateParentMeasureCallback));
+
+        public static int GetRow(FrameworkElement element)
+        {
+            return (int)element.GetValue(RowProperty);
+        }
+
+        public static void SetRow(FrameworkElement element, int value)
+        {
+            element.SetValue(RowProperty, value);
+        }
+
+        /// <summary>
+        /// how many rows are located by the element
+        /// </summary>
+        public static readonly DependencyProperty RowSpanProperty = DependencyProperty.RegisterAttached("RowSpan",
+                                                                                                        typeof (int),
+                                                                                                        typeof (
+                                                                                                            FrameworkElement
+                                                                                                            ),
+                                                                                                        new PropertyMetadata
+                                                                                                            (1,
+                                                                                                             InvalidateParentMeasureCallback));
+        public static int GetRowSpan(FrameworkElement element)
+        {
+            return (int)element.GetValue(RowSpanProperty);
+        }
+
+        public static void SetRowSpan(FrameworkElement element, int value)
+        {
+            element.SetValue(RowSpanProperty, value);
+        }
+
+        
 
         /// <summary>
         /// Делает возможность использовать канвасные элементы внутри клетки

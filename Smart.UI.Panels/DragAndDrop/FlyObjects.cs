@@ -4,7 +4,7 @@ using Smart.Classes.Subjects;
 namespace Smart.UI.Panels
 {
     /// <summary>
-    /// Обертка управляющая драгом летающих объектов
+    /// a cover for objects that is being dragged and dropped
     /// </summary>
     public class ObjectFly //: IObjectFly
     {
@@ -12,6 +12,11 @@ namespace Smart.UI.Panels
         public Point ObjectShift;
         public Size Space;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target">dragged object</param>
+        /// <param name="start">point where the drag started</param>
         public ObjectFly(FrameworkElement target, Point start = default(Point))
         {
             StartMouse = start;

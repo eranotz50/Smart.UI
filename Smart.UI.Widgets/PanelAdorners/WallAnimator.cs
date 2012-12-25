@@ -63,7 +63,7 @@ namespace Smart.UI.Widgets.PanelAdorners
             SimpleSubject<Args<FrameworkElement, Rect, Size>> onArrange = item.GetOrNewOnArrange();
             onArrange.OnceIf(i => i.Param0.Visibility == Visibility.Visible, i =>
                                                                                  {
-                                                                                     Panel.Event(
+                                                                                     Panel.RunEvent(
                                                                                          new RelativeResizeEvent(item,
                                                                                                                  new Point
                                                                                                                      (1,

@@ -173,12 +173,13 @@ namespace Smart.UI.Panels
         public void AssignStart(double pool)
         {
             throw new NotImplementedException();
-
+            /*
             StarLength = pool/AllStars;
             foreach (LineDefinition line in Stars)
             {
                 line.StarLength = StarLength;
             }
+             * */
         }
 
 

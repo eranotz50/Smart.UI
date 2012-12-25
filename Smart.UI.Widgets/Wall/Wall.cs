@@ -547,7 +547,7 @@ namespace Smart.UI.Widgets
             FrameworkElement item = args.Param0;
             CellsRegion region = args.Param2.ToCellsRegion(Orientation);
             InvisibleChange(item, region);            
-            SetMovement(item, MoveInCellsTo(item, region, MovementTime, Easings.CubicEaseInOut).Go());
+            SetMovement(item, this.MoveInCellsTo(item, region, MovementTime, Easings.CubicEaseInOut).Go());
         }
 
         /// <summary>

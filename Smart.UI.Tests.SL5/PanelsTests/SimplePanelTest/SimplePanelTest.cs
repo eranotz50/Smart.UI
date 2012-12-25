@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Silverlight.Testing;
-using Microsoft.Silverlight.Testing.UnitTesting.Metadata.VisualStudio;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Smart.UI.Panels;
 using Smart.TestExtensions;
@@ -13,6 +13,7 @@ using Smart.UI.Classes.Layout;
 
 namespace Smart.UI.Tests.PanelsTests
 {
+    [TestClass]
     public class SimplePanelTest : SilverlightTest
     {
 
@@ -69,7 +70,7 @@ namespace Smart.UI.Tests.PanelsTests
         }
 
         [TestMethod]
-        public void RemoveChildrenTest()
+        public void RemoveFromChildrenTest()
         {
             MakeMatreshka();
             Assert.AreSame(FlexCanvases[0], FlexCanvases[1].Parent);
@@ -77,6 +78,23 @@ namespace Smart.UI.Tests.PanelsTests
             Assert.AreEqual(null, FlexCanvases[1].Parent);
             FlexCanvases[0].Children.Add(FlexCanvases[1]);
             Assert.AreSame(FlexCanvases[0], FlexCanvases[1].Parent);
+        }
+
+        [TestMethod]
+        public void RemoveChildrenTest()
+        {
+            var p = this.FlexCanvases[0];
+            for (int i = 0; i < Count; i++)
+            {
+                p.AddChild(this.FlexGrids[i]);
+                p.AddChild(this.Controls[i]);
+                p.AddChild(this.Canvases[i]);
+            }
+            p.Children.Count.ShouldBeEqual(30);
+            p.RemoveChildren(i=>i is Canvas);
+            p.Children.Count.ShouldBeEqual(20);
+            p.RemoveChildren(i=>i is ContentControl);
+            p.Children.Count(i => i is FlexGrid).ShouldBeEqual(10);
         }
 
         [TestMethod]
@@ -209,6 +227,8 @@ namespace Smart.UI.Tests.PanelsTests
             var actualPos = new Point(FlexCanvases[7].GetBoundsTop().X, FlexCanvases[7].GetBoundsTop().Y);
             actualPos.ShouldBeEqual(desiredPos);
         }
+
+       
 
 
     }

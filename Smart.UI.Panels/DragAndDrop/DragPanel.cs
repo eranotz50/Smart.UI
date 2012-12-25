@@ -33,15 +33,16 @@ namespace Smart.UI.Panels
                                                                                            new PropertyMetadata(true,
                                                                                                                 InvalidateArrangeCallback));
 
-        public static readonly DependencyProperty WaitBeforeDragProperty =
-            DependencyProperty.Register("WaitBeforeDrag", typeof (TimeSpan), typeof (DragPanel),
-                                        new PropertyMetadata( /*default(TimeSpan)*/new TimeSpan(0, 0, 0, 0, 100)));
 
         public Boolean DragEnabled
         {
             get { return (Boolean) GetValue(DragEnabledProperty); }
             set { SetValue(DragEnabledProperty, value); }
         }
+
+        public static readonly DependencyProperty WaitBeforeDragProperty =
+    DependencyProperty.Register("WaitBeforeDrag", typeof(TimeSpan), typeof(DragPanel),
+                                new PropertyMetadata( /*default(TimeSpan)*/new TimeSpan(0, 0, 0, 0, 100)));
 
         public TimeSpan WaitBeforeDrag
         {
@@ -51,6 +52,9 @@ namespace Smart.UI.Panels
 
         #endregion
 
+        /// <summary>
+        /// Defines dockind mode: is it free or it takes into consideration other elements or is prohibited
+        /// </summary>
         public DockMode DockingMode = DockMode.DockEverywhere;
 
 
@@ -318,18 +322,21 @@ namespace Smart.UI.Panels
                                                                                          DockChild);
                                                                                      Dockers.GetOutOfMemory();
                                                                                  });
+            this.AllowDock = this.AllowDockHandler;
         }
 
+        public Func<ObjectFly, Boolean> AllowDock;
+       
         /// <summary>
         /// Allows docking of selected control
         /// </summary>
         /// <param name="fly"></param>
         /// <returns></returns>
-        public virtual bool AllowDock(ObjectFly fly)
+        protected virtual bool AllowDockHandler(ObjectFly fly)
         {
             return fly.DockMode != DockMode.DockOnFreeSpace || CheckFreeSpace(fly.Target);
         }
-
+       
         public virtual Boolean CheckFreeSpace<T>(T target) where T : FrameworkElement
         {
             int q = target.Parent == this ? 1 : 0;

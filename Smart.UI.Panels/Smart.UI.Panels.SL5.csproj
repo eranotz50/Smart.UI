@@ -108,12 +108,6 @@
     <Compile Include="Shapes\VerticalArrow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BasicPanels\SimplePanel.cs.orig" />
-    <None Include="DragAndDrop\DragPanel.cs.orig" />
-    <None Include="Grids\FlexGrid.cs.orig" />
-    <None Include="Grids\GridLines.cs.orig" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Smart.UI.Classes\Smart.Classes\Smart.Classes.SL5.csproj">
       <Project>{f0b2d266-4205-4bb3-bdc0-a91c6ff3e508}</Project>
       <Name>Smart.Classes.SL5</Name>

@@ -746,14 +746,14 @@ namespace Smart.UI.Panels
 
         #region Implementation of IEventHub
 
-        public void Event<TEventArgs>(TEventArgs eventArgs) where TEventArgs : INamed
+        public SimpleSubject<TEventArgs> RunEvent<TEventArgs>(TEventArgs eventArgs) where TEventArgs : INamed
         {
-            SmartEventManager.Event(eventArgs);
+            return SmartEventManager.RunEvent(eventArgs);
         }
 
-        public void Event<TEventArgs>(string name, TEventArgs eventArgs)
+        public SimpleSubject<TEventArgs> RunEvent<TEventArgs>(string name, TEventArgs eventArgs)
         {
-            SmartEventManager.Event(name, eventArgs);
+            return SmartEventManager.RunEvent(name, eventArgs);
         }
 
         public bool HasEvent<TEvenrArgs>(string name)

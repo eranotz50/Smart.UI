@@ -254,6 +254,15 @@ namespace Smart.UI.Panels
             Children.Add(child);
         }
 
+        /// <summary>
+        /// Removes specified children
+        /// </summary>
+        /// <param name="removeSelector"></param>
+        public void RemoveChildren(Func<FrameworkElement,bool> removeSelector)
+        {
+            this.Children.Where(removeSelector).ToList().ForEach(i=>this.Children.Remove(i));
+        }
+
         public void RemoveChild(FrameworkElement child)
         {
             if (child != null && child.Parent == this) Children.Remove(child);

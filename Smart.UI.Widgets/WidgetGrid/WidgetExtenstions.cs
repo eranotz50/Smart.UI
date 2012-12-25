@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Smart.Classes.Extensions;
+using System.Linq;
 using Smart.UI.Panels;
 using Smart.UI.Classes.Animations;
 using Smart.UI.Classes.Extensions;
@@ -8,20 +12,12 @@ using Smart.UI.Classes.Extensions.StructExtensions;
 
 namespace Smart.UI.Widgets
 {
+    /// <summary>
+    /// Extensions for framework elements using functionality of widgegrids
+    /// </summary>
     public static class WidgetExtenstions
     {
-        /*
-        /// <summary>
-        /// Animationly parking an element to the nearest grid cell
-        /// </summary>
-        /// <param name="element"></param>
-        /// <returns></returns>
-        public static Animation ParkToGrid(this FrameworkElement element)
-        {
-            var p = element.Parent as WidgetGrid;
-            return p == null ? null : p.GridParking(element);
-        }
-        */
+      
         public static FrameworkElement ParkToGrid(this FrameworkElement element, CellsRegion region)
         {
             return
@@ -88,6 +84,15 @@ namespace Smart.UI.Widgets
         }
 
 
+        /// <summary>
+        /// This function if often used when we want to change the relative size of the element
+        /// for instance, make cool apearance or select effects
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="relative"></param>
+        /// <param name="howLong"></param>
+        /// <param name="easing"></param>
+        /// <returns></returns>
         public static Animation ResizeInCellsRelatively(this FrameworkElement element, Point relative,
                                                         TimeSpan howLong = default(TimeSpan),
                                                         IEasingFunction easing = null)
@@ -95,6 +100,31 @@ namespace Smart.UI.Widgets
             Rect from = element.GetSlot();
             if (from.Equals(Rect.Empty)) from = element.GetBounds();
             return element.MoveInCells(from.ResizeRectRelatively(relative), howLong, easing);
+        }
+
+        /// <summary>
+        /// This animation changes elements size in relative to its
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="howLong"></param>
+        /// <param name="easing"></param>
+        /// <returns></returns>
+        public static Animation ResizeInCellsRelatively(this IEnumerable<Tuple<FrameworkElement,Point>> elements,
+                                                       TimeSpan howLong = default(TimeSpan),
+                                                       IEasingFunction easing = null)
+        {
+            Contract.Requires(elements.Any());
+            var p = elements.First().Item1.GetParent<WidgetGrid>();
+            if (p == null) return null;
+            List<Tuple<FrameworkElement, Rect>> objs = elements.Select(i =>
+                                          {
+                                              Rect from = i.Item1.GetSlot();
+                                              if (from.Equals(Rect.Empty)) from = i.Item1.GetBounds();
+                                              return new Tuple<FrameworkElement, Rect>(i.Item1,
+                                                                                       from.ResizeRectRelatively(i.Item2));
+                                          }).ToList();
+            return p.MoveInCellsMassive(objs, howLong, easing);
+
         }
     }
 }
