@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Microsoft.Silverlight.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Smart.UI.Panels;
-using Smart.TestExtensions;
 using Smart.UI.Classes.Extensions;
 using Smart.UI.Classes.Extensions.StructExtensions;
 using Smart.UI.Tests.TestBases;
+using Smart.TestExtensions;
 
 namespace Smart.UI.Tests.PanelsTests.FlexCanvasTest
 {

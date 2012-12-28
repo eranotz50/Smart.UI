@@ -173,7 +173,7 @@ namespace Smart.UI.Panels
 
         #region ORIENTABLE
 
-        #region
+        #region COORDS SETTINGS
 
         public static T SetCoord<T>(this T source, Point coord) where T : FrameworkElement, IOrientable
         {

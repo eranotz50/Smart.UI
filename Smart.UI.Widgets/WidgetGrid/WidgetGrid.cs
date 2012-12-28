@@ -2,13 +2,16 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media.Animation;
+using Smart.UI.Classes.Other;
 using Smart.UI.Panels;
 using Smart.Classes.Extensions;
 using Smart.UI.Classes.Animations;
 using Smart.UI.Classes.Extensions;
 using Smart.UI.Classes.Extensions.StructExtensions;
 using Smart.UI.Classes.Layout;
+using Smart.Classes.Reflectives;
 
 namespace Smart.UI.Widgets
 {
@@ -22,14 +25,7 @@ namespace Smart.UI.Widgets
         public static readonly DependencyProperty ParkingDurationProperty =
             DependencyProperty.Register("ParkingDuration", typeof (TimeSpan), typeof (WidgetGrid),
                                         new PropertyMetadata(new TimeSpan(0, 0, 0, 0, 400)));
-
-        public static readonly DependencyProperty ColsNumProperty =
-            DependencyProperty.Register("ColsNum", typeof (int), typeof (WidgetGrid),
-                                        new PropertyMetadata(0, InvalidateMeasureCallback));
-
-        public static readonly DependencyProperty RowsNumProperty =
-            DependencyProperty.Register("RowsNum", typeof (int), typeof (WidgetGrid),
-                                        new PropertyMetadata(0, InvalidateMeasureCallback));
+   
 
 
         /// <summary>
@@ -60,24 +56,37 @@ namespace Smart.UI.Widgets
         }
 
 
+        public static readonly DependencyProperty ColsNumProperty = DependencyProperty<WidgetGrid>.Register(o => o.ColsNum, w => w.ColsCallback);
+        
         /// <summary>
         /// setter and getter to easy set up cols in xaml (it automaticaly adds new LineDefinitions to ColumnDefinitions untul total count reaches colsnum value)
         /// </summary>
         public int ColsNum
         {
-            get
-            {
-                //return ColumnDefinitions.Count;
-                SetValue(ColsNumProperty, ColumnDefinitions.Count);
-                return (int)GetValue(ColsNumProperty);
-            }
+            get { return (int) GetValue(ColsNumProperty); }
             set
-            {
-                if (value <= 0 || value.Equals(ColsNum)) return;
-                ColumnDefinitions.MakeNum(value);
-                SetValue(ColsNumProperty, ColumnDefinitions.Count);
+            {                
+                Contract.Requires(value>=0);
+                Contract.Ensures(ColumnDefinitions.Count==ColsNum);
+                SetValue(ColsNumProperty, value);
             }
         }
+
+        /// <summary>
+        /// Callback than invalidates measure of the element
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        public void ColsCallback(DependencyPropertyChangedEventArgs<int> e)
+        {
+            if(e.NewValue==ColumnDefinitions.Count) return;
+            ColumnDefinitions.MakeNum(e.NewValue);                
+        }
+        
+        public static readonly DependencyProperty RowsNumProperty = DependencyProperty<WidgetGrid>.Register(o => o.RowsNum, w => w.RowsCallback);
+        //.Register("RowsNum", typeof(int), typeof(WidgetGrid),new PropertyMetadata(0, InvalidateMeasureCallback));
+
+
 
         /// <summary>
         /// setter and getter to easy set up cols in xaml (it automaticaly adds new LineDefinitions to RowDefinitions untul total count reaches rowsnum value)
@@ -86,15 +95,25 @@ namespace Smart.UI.Widgets
         {
             get
             {
-                SetValue(RowsNumProperty, RowDefinitions.Count);
                 return (int) GetValue(RowsNumProperty);
             }
             set
             {
-                if (value <= 0 || value.Equals(RowsNum)) return;
-                RowDefinitions.MakeNum(value);
-                SetValue(RowsNumProperty, RowDefinitions.Count);
+                Contract.Requires(value>=0);
+                Contract.Ensures(this.RowDefinitions.Count==this.RowsNum);
+                SetValue(RowsNumProperty,value);                              
             }
+        }
+
+          /// <summary>
+        /// Callback than invalidates measure of the element
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        public void RowsCallback(DependencyPropertyChangedEventArgs<int> e)
+        {
+            if (e.NewValue == this.RowDefinitions.Count) return;            
+            this.RowDefinitions.MakeNum(e.NewValue);
         }
         
         public Boolean PreserveSpans
@@ -140,7 +159,11 @@ namespace Smart.UI.Widgets
 
         #endregion
 
-       
+        public WidgetGrid():base()
+        {
+            this.SetBinding(RowsNumProperty, this.RowDefinitions.Bind2MyProp(p => p.Count));
+            this.SetBinding(ColsNumProperty, this.ColumnDefinitions.Bind2MyProp(p => p.Count));
+        }
 
         /// <summary>
         /// Checks whether projection of the element onto widgetgrid intersects any of its nonadorner and nondecorating childrens
@@ -163,7 +186,8 @@ namespace Smart.UI.Widgets
         /// <returns></returns>
         protected override bool AllowDockHandler(ObjectFly fly)
         {
-            return fly.DockMode != DockMode.DockOnFreeSpace || !CheckProjection(fly.Target);
+
+            return DragManager.GetDockMode(this)!=DockMode.NoDock && ( fly.DockMode != DockMode.DockOnFreeSpace || !CheckProjection(fly.Target));
             //return base.AllowDock(fly);
         }
 

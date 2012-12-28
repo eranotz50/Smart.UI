@@ -15,8 +15,7 @@
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>
-    </SupportedCultures>
+    <SupportedCultures></SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>Smart.UI.Tests.SL5.xap</XapFilename>
@@ -29,8 +28,7 @@
     <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
     <UsePlatformExtensions>false</UsePlatformExtensions>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <LinkedServerProject>
-    </LinkedServerProject>
+    <LinkedServerProject></LinkedServerProject>
   </PropertyGroup>
   <!-- This property group is only here to support building this project using the 
        MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
@@ -120,6 +118,7 @@
     <Compile Include="PanelsTests\SimplePanelTest\OutModeTest.cs" />
     <Compile Include="PanelsTests\SimplePanelTest\Pos3DTest.cs" />
     <Compile Include="PanelsTests\SimplePanelTest\SimplePanelTest.cs" />
+    <Compile Include="BindingTests\BindingTest.cs" />
     <Compile Include="PanelsTests\WidgetGridTest\CellsCheckingTest.cs" />
     <Compile Include="PanelsTests\WidgetGridTest\MovingToCellTest.cs" />
     <Compile Include="PanelsTests\WidgetGridTest\ShiftAndCanvasTest.cs" />
@@ -204,6 +203,7 @@
       <Name>Smart.UI.Widgets.SL5</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

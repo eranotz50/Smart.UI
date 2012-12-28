@@ -113,13 +113,13 @@ namespace Smart.UI.Tests.AdornersTests
             bounds.Y.ShouldBeEqual(0);
             bounds.Width.ShouldBeEqual(400);
             bounds.Height.ShouldBeEqual(400);          
-            fly.CurrentMouse = new Point(300,300);            
-            Cell.DockingMode = DockMode.NoDock;
+            fly.CurrentMouse = new Point(300,300);    
+            DragManager.SetDockMode(Cell, DockMode.NoDock);
             Grids.OnFly(fly);
-            Cell.DockingMode = DockMode.DockEverywhere;            
+            DragManager.SetDockMode(Cell, DockMode.DockEverywhere);            
             var f = Grids.FindDock(fly.Target);
             f.Name.ShouldBeEqual(Cell.Name);
-            Cell.DockingMode = DockMode.NoDock;
+            DragManager.SetDockMode(Cell,DockMode.NoDock);
             bounds = fly.Target.GetBounds().GetIntersectionRect(Cell.GetBounds());
             bounds.Width.ShouldBeEqual(300);
             bounds.Height.ShouldBeEqual(300);

@@ -26,12 +26,13 @@ namespace Smart.UI.Panels
     #endregion
 
     /// <summary>
-    /// Панелька, основной особенностью которой является реактивная коллекция для содержания чаилдов,
-    /// на ней основываются все остальные панели
+    /// Basic panel of Smart.UI.Panels library.
+    /// It has its own children propertie that is based on SmartCollection and has some advantages over default Children
+    /// Like monitoring addition and removel of childrens, different subscriptions
     /// </summary>
     [ContentProperty("Children")]
-    public abstract class BasicSmartPanel : Panel, IBasicSmartPanel, INamed, IChildrenHolder<FrameworkElement>
-                                            
+    public abstract class BasicSmartPanel : Panel, IBasicSmartPanel, INamed, IChildrenHolder<FrameworkElement>,IParentHolder<DependencyObject>
+
     {
         #region CALLBACKS
 
@@ -104,14 +105,14 @@ namespace Smart.UI.Panels
         {
             get { return (SmartCollection<FrameworkElement>) GetValue(ChildrenProperty); }
             set
-            {
+            {                
                 SmartCollection<FrameworkElement> old = Children;
                 if (old != null)
                 {
                     value.ItemsAdded = old.ItemsAdded;
                     value.ItemsRemoved = old.ItemsRemoved;
                 }
-                SetValue(ChildrenProperty, value);
+                SetValue(ChildrenProperty, value); 
             }
         }
 
@@ -447,5 +448,6 @@ namespace Smart.UI.Panels
         }
 
         #endregion
+
     }
 }

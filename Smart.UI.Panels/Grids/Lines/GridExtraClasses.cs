@@ -14,13 +14,13 @@
         ChosenLinesOnly,
         None
     }
-
+    /*
     public enum ConstrainsMode
     {
         Default,
         ChangePanel
     }
-
+    */
 
     public class LineMover
     {

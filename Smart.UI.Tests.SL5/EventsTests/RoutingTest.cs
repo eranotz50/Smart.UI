@@ -48,7 +48,7 @@ namespace Smart.UI.Tests.EventsTests
                 for (var j = 0; j < pC.Count; j++)
                 {
                     var pR = pC[j];
-                    pR.SmartEventManager.AddEventHandler<int>("ev", v => this.Q+=v);
+                    pR.EventManager.AddEventHandler<int>("ev", v => this.Q+=v);
                 }
             }
             this.Panels.Last().Last().RaiseEvent(ev,1);

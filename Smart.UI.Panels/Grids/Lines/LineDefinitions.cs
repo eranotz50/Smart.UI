@@ -10,11 +10,15 @@ using Smart.Classes.Extensions;
 
 namespace Smart.UI.Panels
 {
+    /// <summary>
+    /// Class for RowDefinitions and Columndefinitions
+    /// All grids relies on them
+    /// </summary>
     public class LineDefinitions : NumeratedCollection<LineDefinition>, IOrientable
     {
         public SmartCollection<LineDefinition> Autos;
 
-        public ConstrainsMode ConstrainsMode = ConstrainsMode.Default; //NAPILNIK
+       // public ConstrainsMode ConstrainsMode = ConstrainsMode.Default; //NAPILNIK
 
         /// <summary>
         /// Cached stared linedefs
@@ -23,8 +27,6 @@ namespace Smart.UI.Panels
 
         public Action Update;
         public SmartCollection<LineDefinition> Values;
-
-        private PanelUpdateMode _panelUpdateMode = PanelUpdateMode.None;
 
         #region DELTAS
 
@@ -77,7 +79,7 @@ namespace Smart.UI.Panels
 
         #region LENGTH AND COORDINATES RELATED
 
-        protected Boolean BlockNextUpdate; //NAPILNIK, нужно когда мы принуждаем панельку расти
+        protected Boolean BlockNextUpdate; //NAPILNIK, needed for forcing the panel grow
         public Boolean BlockPanelUpdate;
 
         public double StarLength;
@@ -113,6 +115,10 @@ namespace Smart.UI.Panels
             get { return Stars.Count > 0; }
         }
 
+        /// <summary>
+        /// Length of whole lindefinitions
+        /// when being set assigns linedefs values (like stars)
+        /// </summary>
         public double Length
         {
             get { return _length; }
@@ -507,6 +513,8 @@ namespace Smart.UI.Panels
         }
 
         #endregion
+
+        private PanelUpdateMode _panelUpdateMode = PanelUpdateMode.None;
 
         public PanelUpdateMode PanelUpdateMode
         {

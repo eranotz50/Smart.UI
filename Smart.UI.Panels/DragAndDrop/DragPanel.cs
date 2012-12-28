@@ -52,11 +52,12 @@ namespace Smart.UI.Panels
 
         #endregion
 
+        /*
         /// <summary>
         /// Defines dockind mode: is it free or it takes into consideration other elements or is prohibited
         /// </summary>
         public DockMode DockingMode = DockMode.DockEverywhere;
-
+        */
 
         public DragPanel()
         {
@@ -94,7 +95,7 @@ namespace Smart.UI.Panels
         /// <summary>
         /// class that deals with making fly objects
         /// </summary>
-        public IDragManager DragManager;
+        public DragManager DragManager;
 
         public IObservable<ObjectFly> OnTheFly;
 
@@ -278,7 +279,7 @@ namespace Smart.UI.Panels
             DragPanel biggest = this;
             foreach (DragPanel item in DragPanels)
             {
-                if (item == el || item.DockingMode == DockMode.NoDock) continue;
+                if (item == el || DragManager.GetDockMode(item) == DockMode.NoDock) continue;
                 double currentSquare = place.GetIntersectionSquare( /*item.GetBounds()*/item.GetSlot());
                 if (currentSquare <= square) continue;
                 square = currentSquare;
@@ -334,9 +335,10 @@ namespace Smart.UI.Panels
         /// <returns></returns>
         protected virtual bool AllowDockHandler(ObjectFly fly)
         {
-            return fly.DockMode != DockMode.DockOnFreeSpace || CheckFreeSpace(fly.Target);
+            return DragManager.GetDockMode(this) != DockMode.NoDock &&
+                   (fly.DockMode != DockMode.DockOnFreeSpace || CheckFreeSpace(fly.Target));
         }
-       
+
         public virtual Boolean CheckFreeSpace<T>(T target) where T : FrameworkElement
         {
             int q = target.Parent == this ? 1 : 0;

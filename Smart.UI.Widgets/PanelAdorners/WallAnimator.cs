@@ -29,8 +29,8 @@ namespace Smart.UI.Widgets.PanelAdorners
             foreach (FrameworkElement item in Panel.Items) AddHandlers(item);
             Panel.Items.ItemsAdded.DoOnNext += AddHandlers;
             //Panel.ItemPositionUpdate.DoOnNext += ItemPositionChangeHandler;
-            Panel.SmartEventManager.AddEventHandler<RelativeResizeEvent>(ResizeHandler);
-            Panel.SmartEventManager.AddEventHandler<RelativeResizeEvent>(AbsoluteCellResize, AbsoluteResizeHandler);
+            Panel.EventManager.AddEventHandler<RelativeResizeEvent>(ResizeHandler);
+            Panel.EventManager.AddEventHandler<RelativeResizeEvent>(AbsoluteCellResize, AbsoluteResizeHandler);
         }
         /*
         /// <summary>
@@ -119,8 +119,8 @@ namespace Smart.UI.Widgets.PanelAdorners
            // Panel.ItemPositionUpdate.DoOnNext -= ItemPositionChangeHandler;
             Panel.Items.ItemsAdded.DoOnNext -= AddHandlers;
             foreach (FrameworkElement item in Panel.Items) RemoveHandlers(item);
-            Panel.SmartEventManager.RemoveHandler<RelativeResizeEvent>(ResizeHandler);
-            Panel.SmartEventManager.RemoveHandler<RelativeResizeEvent>(AbsoluteCellResize, AbsoluteResizeHandler);
+            Panel.EventManager.RemoveHandler<RelativeResizeEvent>(ResizeHandler);
+            Panel.EventManager.RemoveHandler<RelativeResizeEvent>(AbsoluteCellResize, AbsoluteResizeHandler);
         }
     }
 }

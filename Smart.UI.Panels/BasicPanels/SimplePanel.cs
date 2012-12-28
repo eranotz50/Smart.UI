@@ -265,7 +265,7 @@ namespace Smart.UI.Panels
             OnShowItem += ShowItemHandler;
             OnHideItem += HideItemHandler;
 
-            SmartEventManager = new SmartEventManager();
+            EventManager = new SmartEventManager();
             ;
         }
 
@@ -748,24 +748,29 @@ namespace Smart.UI.Panels
 
         public SimpleSubject<TEventArgs> RunEvent<TEventArgs>(TEventArgs eventArgs) where TEventArgs : INamed
         {
-            return SmartEventManager.RunEvent(eventArgs);
+            return EventManager.RunEvent(eventArgs);
+        }
+
+        public SimpleSubject<TEventArgs> RouteEventTo<TEventArgs>(string name, IEventsHolder where)
+        {
+            return this.EventManager.RouteEventTo<TEventArgs>(name,where);
         }
 
         public SimpleSubject<TEventArgs> RunEvent<TEventArgs>(string name, TEventArgs eventArgs)
         {
-            return SmartEventManager.RunEvent(name, eventArgs);
+            return EventManager.RunEvent(name, eventArgs);
         }
 
         public bool HasEvent<TEvenrArgs>(string name)
         {
-            return SmartEventManager.HasEvent<TEvenrArgs>(name);
+            return EventManager.HasEvent<TEvenrArgs>(name);
         }
 
         #endregion
 
         #region IEventsHolder Members
 
-        public SmartEventManager SmartEventManager { get; set; }
+        public SmartEventManager EventManager { get; set; }
 
         #endregion
     }

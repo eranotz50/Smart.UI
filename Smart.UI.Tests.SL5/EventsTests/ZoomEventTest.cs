@@ -40,7 +40,7 @@ namespace Smart.UI.Tests.EventsTests
         {
             var zoomEvent = "ZoomAt";
             //this.Grids.SmartEventManager.AddEventHandler<TimeSpan>(zoomBack, ZoomBackHandler);
-            this.Grids.SmartEventManager.AddEventHandler<ZoomAtEvent>(zoomEvent, ZoomAtHandler);
+            this.Grids.EventManager.AddEventHandler<ZoomAtEvent>(zoomEvent, ZoomAtHandler);
             this.Cell.GetBounds().ShouldBeEqual(new Rect(400, 400, 100, 100));
             this.UpdateLayout();
 
